@@ -1,0 +1,98 @@
+---
+title: "PalmerDash"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+    source_code: "https://github.com/PythonCoderUnicorn/flexdash"
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(palmerpenguins)
+library(paletteer)
+library(reactable)
+library(bslib)
+library(thematic)
+
+```
+
+# Page 1
+
+### **Palmer Penguins**
+Aenean blandit rutrum dui nec consectetur. Integer at tincidunt mi. In porta dapibus ornare. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor libero vitae felis feugiat, quis vehicula nisl finibus. Donec in justo eu turpis placerat eleifend. Nunc quis mi sit amet augue congue pulvinar ac id tortor. Mauris posuere mauris a lacus imperdiet, ut iaculis quam eleifend. Nam efficitur sapien lacus, et elementum mi volutpat et. Nunc eu ligula velit. Donec ex velit, placerat non consequat id, rhoncus in dui. Ut condimentum placerat tellus, at suscipit erat lacinia in. Aenean blandit rutrum dui nec consectetur. Integer at tincidunt mi. In porta dapibus ornare.
+
+
+## Palmer Penguins dataset {data-width="650"}
+
+```{r fig.height=6, fig.width=9.8}
+pengs = palmerpenguins::penguins
+
+pengs %>% 
+  select(body_mass_g, island) %>%
+  group_by(island) %>% 
+  arrange( desc(body_mass_g)) %>% 
+  ggplot(
+    aes(x= body_mass_g,
+        y= island,
+        col= body_mass_g)
+  )+
+  geom_point(size=4, alpha=0.5)+
+  scale_color_viridis_c(option = 'F')
+```
+
+
+
+
+
+# Page 2
+
+
+### **Palmer Penguins 2**
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor libero vitae felis feugiat, quis vehicula nisl finibus. Donec in justo eu turpis placerat eleifend. Nunc quis mi sit amet augue congue pulvinar ac id tortor. Mauris posuere mauris a lacus imperdiet, ut iaculis quam eleifend. Nam efficitur sapien lacus, et elementum mi volutpat et. Nunc eu ligula velit. Donec ex velit, placerat non consequat id, rhoncus in dui. Ut condimentum placerat tellus, at suscipit erat lacinia in. Aenean blandit rutrum dui nec consectetur. Integer at tincidunt mi. In porta dapibus ornare.
+
+## Palmer Penguins dataset {data-width="650"}
+
+```{r fig.height=6, fig.width=9.8}
+ggplot(
+  pengs,
+  aes(x= flipper_length_mm,
+      y= body_mass_g,
+      col= sex)
+)+
+  geom_point()+
+  scale_color_paletteer_d("basetheme::dark")
+```
+
+
+
+
+
+
+
+
+# Page 3
+
+Palmer penguins
+
+```{r fig.height=5, fig.width=9.8}
+ggplot(pengs,
+       aes(x= island, fill= species)
+       )+
+  geom_bar()+
+  scale_fill_manual(values = c('darkorange','purple','cyan4'))+ 
+  coord_flip()
+```
+
+In eu libero eleifend, pretium urna eu, ornare lectus. Duis vulputate erat sem, a vehicula urna mattis ut.
+
+
+### Text 3-1
+Aenean vestibulum nec urna id varius. Duis congue venenatis ante, ultrices eleifend ante pulvinar vitae. Mauris eu commodo lectus. Cras interdum lacus ligula, a lobortis magna pharetra eget. Duis consectetur euismod mi nec efficitur. Aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquet in turpis id pretium. Pellentesque fringilla ex et eros eleifend malesuada.
+
+
+#Page 4
+
+### Text 3-2
+Sed sed gravida eros, blandit lacinia velit. Pellentesque ante nisi, sodales ut elit eu, tristique accumsan tellus. Ut blandit lorem eu consectetur ullamcorper. Maecenas pellentesque elit et justo sollicitudin, sit amet ultricies purus eleifend. Nam interdum lacus vitae egestas convallis. Quisque aliquam tristique mauris et ornare. Fusce eget ante diam. Etiam gravida est sed neque fringilla consectetur. In eu libero eleifend, pretium urna eu, ornare lectus. Duis vulputate erat sem, a vehicula urna mattis ut. Sed sapien dui, luctus at convallis sit amet, feugiat quis ex. Aliquam eget mi sed dolor tincidunt tempor nec commodo nisi. Nulla facilisi.
